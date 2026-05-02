@@ -1,0 +1,19 @@
+{
+
+  "name": "striepband",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev -w web",
+    "dev:cms": "npm run dev -w cms",
+    "build:web": "npm run build -w web",
+    "build:cms": "npm run build -w cms"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
