@@ -2,6 +2,7 @@
 import "../styles/global.css";
 
 import SiteHeader from "../components/SiteHeader.astro";
+import { Font } from "astro:assets";
 ---
 
 <html lang="en">
@@ -16,6 +17,9 @@ import SiteHeader from "../components/SiteHeader.astro";
     <link rel="manifest" href="/site.webmanifest" />
 
     <title>Striep</title>
+
+    <Font cssVariable="--font-permanent-marker" />
+    <Font cssVariable="--font-roboto-slab" />
   </head>
   <body>
     <SiteHeader />

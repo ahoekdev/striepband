@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 
 import sanity from "@sanity/astro";
 
@@ -18,4 +18,19 @@ export default defineConfig({
   ],
 
   adapter: netlify(),
+
+  fonts: [
+    {
+      provider: fontProviders.google(),
+      name: "Roboto Slab",
+      cssVariable: "--font-roboto-slab",
+      weights: ["100 900"],
+    },
+    {
+      provider: fontProviders.google(),
+      name: "Permanent Marker",
+      cssVariable: "--font-permanent-marker",
+      weights: ["100 900"],
+    },
+  ],
 });
