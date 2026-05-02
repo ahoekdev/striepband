@@ -3,6 +3,8 @@ import { defineConfig } from "astro/config";
 
 import sanity from "@sanity/astro";
 
+import netlify from "@astrojs/netlify";
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [
@@ -12,4 +14,6 @@ export default defineConfig({
       useCdn: false, // for static builds
     }),
   ],
+
+  adapter: netlify(),
 });
