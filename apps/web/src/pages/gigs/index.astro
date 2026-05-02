@@ -1,7 +1,29 @@
 ---
 import SiteLayout from "../../layouts/SiteLayout.astro";
+import type { SanityDocument } from "@sanity/client";
+import { sanityClient } from "sanity:client";
+
+const POSTS_QUERY = `*[
+  _type == "gig"
+  && defined(slug.current)
+]|order(date desc)[0...12]{_id, title, slug, date}`;
+
+const posts = await sanityClient.fetch<SanityDocument[]>(POSTS_QUERY);
+
+console.log(posts);
 ---
 
 <SiteLayout>
   <h1>Gigs</h1>
+
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <h3>{post.title}</h3>
+          <p>{post.date}</p>
+        </li>
+      ))
+    }
+  </ul>
 </SiteLayout>
