@@ -1,2 +1,13 @@
-@import "normalize.css";
 @import "reset.css";
+@import "container.css";
+@import "typography.css";
+
+body {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}

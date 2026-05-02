@@ -3,9 +3,39 @@
 ---
 
 <header>
-  <a href="/">Striepband</a>
+  <div class="container">
+    <a href="/">Striepband</a>
 
-  <ul>
-    <li><a href="/gigs">Gigs</a></li>
-  </ul>
+    <nav>
+      <ul role="list">
+        <li><a href="/gigs">Optredens</a></li>
+        <li><a href="/about">Over</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
+
+<style>
+  header {
+    height: 4rem;
+    border-bottom: 1px solid black;
+
+    .container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    nav {
+      ul {
+        display: flex;
+        gap: 1rem;
+      }
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+</style>
