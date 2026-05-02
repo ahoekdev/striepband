@@ -1,9 +1,12 @@
 ---
+import { Image } from "astro:assets";
 import SiteLayout from "../layouts/SiteLayout.astro";
+import bandPhoto from "../images/band-photo.jpg";
 ---
 
 <SiteLayout>
   <div class="container">
     <h1>Striep</h1>
+    <Image src={bandPhoto} alt="A photo of the band Striep" width="1920" />
   </div>
 </SiteLayout>
