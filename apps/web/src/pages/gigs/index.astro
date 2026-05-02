@@ -2,7 +2,6 @@
 import SiteLayout from "../../layouts/SiteLayout.astro";
 import type { SanityDocument } from "@sanity/client";
 import { sanityClient } from "sanity:client";
-import { format } from "date-fns";
 
 const GIGS_QUERY = `*[
   _type == "gig"
@@ -29,8 +28,21 @@ const gigs = await sanityClient.fetch<SanityDocument[]>(GIGS_QUERY);
           return (
             <li>
               <div class="datetime">
-                <span>{format(date, "dd MMM")}</span>
-                <span>{format(date, "HH:mm")}</span>
+                <span>
+                  {new Intl.DateTimeFormat("nl-NL", {
+                    timeZone: "Europe/Amsterdam",
+                    day: "2-digit",
+                    month: "short",
+                  }).format(date)}
+                </span>
+                <span>
+                  {new Intl.DateTimeFormat("nl-NL", {
+                    timeZone: "Europe/Amsterdam",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false,
+                  }).format(date)}
+                </span>
               </div>
               <div>
                 <h2>{gig.title}</h2>
