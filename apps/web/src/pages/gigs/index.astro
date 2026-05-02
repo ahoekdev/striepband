@@ -9,8 +9,6 @@ const POSTS_QUERY = `*[
 ]|order(date desc)[0...12]{_id, title, slug, date}`;
 
 const posts = await sanityClient.fetch<SanityDocument[]>(POSTS_QUERY);
-
-console.log(posts);
 ---
 
 <SiteLayout>
