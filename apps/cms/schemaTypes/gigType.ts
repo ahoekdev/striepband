@@ -17,6 +17,10 @@ export const gigType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'url',
+      type: 'url',
+    }),
+    defineField({
       name: 'date',
       type: 'datetime',
       validation: (rule) => rule.required(),

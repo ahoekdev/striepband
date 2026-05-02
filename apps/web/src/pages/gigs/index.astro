@@ -2,11 +2,12 @@
 import SiteLayout from "../../layouts/SiteLayout.astro";
 import type { SanityDocument } from "@sanity/client";
 import { sanityClient } from "sanity:client";
+import { format } from "date-fns";
 
 const GIGS_QUERY = `*[
   _type == "gig"
   && defined(slug.current)
-]|order(date desc)[0...12]{_id, title, slug, date}`;
+]|order(date desc)[0...12]{_id, title, slug, date, url}`;
 
 const gigs = await sanityClient.fetch<SanityDocument[]>(GIGS_QUERY);
 ---
@@ -15,15 +16,58 @@ const gigs = await sanityClient.fetch<SanityDocument[]>(GIGS_QUERY);
   <div class="container">
     <h1>Optredens</h1>
 
+    <p>
+      Hieronder vind je een overzicht van onze aankomende optredens. We hopen je
+      daar te zien!
+    </p>
+
     <ul role="list">
       {
-        gigs.map((gig) => (
-          <li>
-            <h3>{gig.title}</h3>
-            <p>{gig.date}</p>
-          </li>
-        ))
+        gigs.map((gig) => {
+          const date = new Date(gig.date);
+
+          return (
+            <li>
+              <div class="datetime">
+                <span>{format(date, "dd MMM")}</span>
+                <span>{format(date, "HH:mm")}</span>
+              </div>
+              <div>
+                <h2>{gig.title}</h2>
+                <a href={gig.url} target="_blank" rel="noopener noreferrer">
+                  Website
+                </a>
+              </div>
+            </li>
+          );
+        })
       }
     </ul>
   </div>
 </SiteLayout>
+
+<style>
+  ul {
+    margin-top: 1rem;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      h2 {
+        margin: 0;
+      }
+
+      .datetime {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+
+        border: 1px solid black;
+        border-radius: 2px;
+        padding: 0.25rem 0.5rem;
+      }
+    }
+  }
+</style>

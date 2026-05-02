@@ -1,6 +1,11 @@
 ---
 import "../styles/global.css";
 import SiteHeader from "../components/SiteHeader.astro";
+
+import { nl } from "date-fns/locale";
+import { setDefaultOptions } from "date-fns";
+
+setDefaultOptions({ locale: nl });
 ---
 
 <html lang="en">
