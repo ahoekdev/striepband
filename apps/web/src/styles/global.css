@@ -4,6 +4,10 @@
 @import "spacing.css";
 @import "remixicon/fonts/remixicon.css";
 
+:root {
+  --cl-primary-900: hsl(340, 56%, 33%);
+}
+
 body {
   margin: 0;
 }
