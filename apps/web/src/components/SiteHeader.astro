@@ -72,17 +72,20 @@ function isActive(path: string) {
       transition: color 0.2s;
 
       &:hover {
-        color: #444;
+        color: var(--cl-primary-900);
       }
 
       &.active {
+        color: var(--cl-primary-900);
+        pointer-events: none;
+
         &::after {
           content: "";
           position: absolute;
           height: 1px;
           left: 0;
           right: 0;
-          bottom: -0.25rem;
+          bottom: -0.125rem;
           background: currentColor;
         }
       }
