@@ -2,6 +2,7 @@
 @import "container.css";
 @import "typography.css";
 @import "spacing.css";
+@import "remixicon/fonts/remixicon.css";
 
 body {
   margin: 0;

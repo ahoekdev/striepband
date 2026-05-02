@@ -7,6 +7,20 @@ import bandPhoto from "../images/band-photo.jpg";
 <SiteLayout>
   <div class="container">
     <h1>Striep</h1>
-    <Image src={bandPhoto} alt="A photo of the band Striep" width="1920" />
+    <div class="img-container">
+      <Image src={bandPhoto} alt="A photo of the band Striep" width="1920" />
+    </div>
   </div>
 </SiteLayout>
+
+<style>
+  .img-container {
+    border: 1px solid black;
+    padding: 0.125rem;
+    border-radius: 0.25rem;
+
+    img {
+      border-radius: 0.25rem;
+    }
+  }
+</style>
