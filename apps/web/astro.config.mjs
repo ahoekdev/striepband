@@ -8,7 +8,7 @@ import netlify from "@astrojs/netlify";
 // https://astro.build/config
 export default defineConfig({
   output: "server",
-
+  adapter: netlify(),
   integrations: [
     sanity({
       projectId: "c2n8vovr",
@@ -16,9 +16,6 @@ export default defineConfig({
       useCdn: false, // for static builds
     }),
   ],
-
-  adapter: netlify(),
-
   fonts: [
     {
       provider: fontProviders.google(),

@@ -1,25 +1,18 @@
 ---
+import { PortableText } from "astro-portabletext";
 import SiteLayout from "../../layouts/SiteLayout.astro";
-import type { SanityDocument } from "@sanity/client";
-import { sanityClient } from "sanity:client";
+import { fetchGigs } from "../../lib/api/gigs";
+import { fetchPageBySlug } from "../../lib/api/pages";
 
-const GIGS_QUERY = `*[
-  _type == "gig"
-  && defined(slug.current)
-]|order(date desc)[0...12]{_id, title, slug, date, url}`;
+const [{ title, content }] = await fetchPageBySlug("gigs");
 
-const gigs = await sanityClient.fetch<SanityDocument[]>(GIGS_QUERY);
+const gigs = await fetchGigs();
 ---
 
 <SiteLayout>
   <div class="container">
-    <h1>Optredens</h1>
-
-    <p>
-      Hieronder vind je een overzicht van onze aankomende optredens. We hopen je
-      daar te zien!
-    </p>
-
+    <h1>{title}</h1>
+    <PortableText value={content} />
     <ul role="list">
       {
         gigs.map((gig) => {
