@@ -1,9 +1,15 @@
 ---
-const pathname = Astro.url.pathname;
+import type { SanityDocument } from "sanity";
+import { sanityClient } from "sanity:client";
 
-function isActive(path: string) {
-  return pathname === path;
-}
+const pages = await sanityClient.fetch<SanityDocument[]>(`
+  *[_type == "page"]{
+    title,
+    "slug": slug.current
+  }
+`);
+
+const pathname = Astro.url.pathname;
 ---
 
 <header>
@@ -19,16 +25,19 @@ function isActive(path: string) {
         </li>
       </ul>
       <ul role="list">
-        <li>
-          <a href="/gigs" class={isActive("/gigs") ? "active" : undefined}
-            >Optredens</a
-          >
-        </li>
-        <li>
-          <a href="/about" class={isActive("/about") ? "active" : undefined}
-            >Over</a
-          >
-        </li>
+        {
+          pages.map((p) => {
+            const isActive = pathname === `/${p.slug}`;
+
+            return (
+              <li>
+                <a href={`/${p.slug}`} class={isActive ? "active" : undefined}>
+                  {p.title}
+                </a>
+              </li>
+            );
+          })
+        }
       </ul>
     </nav>
   </div>

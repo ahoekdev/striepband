@@ -1,0 +1,43 @@
+---
+import TextWithIllustration from "../components/blocks/TextWithIllustration.astro";
+import GigsList from "../components/GigsList.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { fetchGigs } from "../lib/api/gigs";
+import { fetchPageBySlug } from "../lib/api/pages";
+
+interface Block {
+  _type: string;
+  text: string;
+}
+
+const { slug } = Astro.params;
+
+if (!slug) {
+  return new Response(null, { status: 404 });
+}
+
+const page = await fetchPageBySlug(slug);
+
+if (!page) {
+  return new Response(null, { status: 404 });
+}
+---
+
+<SiteLayout>
+  <div class="container">
+    <h1>{page.title}</h1>
+
+    {
+      page.pageBuilder?.map((block: Block) => {
+        switch (block._type) {
+          case "textWithHeading":
+            return <TextWithIllustration {...block} />;
+          default:
+            return null;
+        }
+      })
+    }
+
+    {slug === "optredens" && <GigsList />}
+  </div>
+</SiteLayout>
