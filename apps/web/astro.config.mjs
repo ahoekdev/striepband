@@ -1,9 +1,12 @@
-// @ts-check
+import { loadEnv } from "vite";
+
 import { defineConfig, fontProviders } from "astro/config";
 
 import sanity from "@sanity/astro";
 
 import netlify from "@astrojs/netlify";
+
+const { SANITY_DATASET } = loadEnv(process.env.NODE_ENV, process.cwd(), "");
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,7 +15,7 @@ export default defineConfig({
   integrations: [
     sanity({
       projectId: "c2n8vovr",
-      dataset: "production",
+      dataset: SANITY_DATASET,
       useCdn: false, // for static builds
     }),
   ],

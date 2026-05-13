@@ -11,12 +11,6 @@ export const gigType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'slug',
-      type: 'slug',
-      options: {source: 'title'},
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
       name: 'url',
       type: 'url',
     }),
@@ -24,17 +18,6 @@ export const gigType = defineType({
       name: 'date',
       type: 'datetime',
       validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'publishedAt',
-      type: 'datetime',
-      initialValue: () => new Date().toISOString(),
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'body',
-      type: 'array',
-      of: [{type: 'block'}],
     }),
   ],
 })

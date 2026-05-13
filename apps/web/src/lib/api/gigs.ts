@@ -2,7 +2,6 @@ import { sanityClient } from "sanity:client";
 
 const GIGS_QUERY = `*[
   _type == "gig"
-  && defined(slug.current)
 ]|order(date desc)[0...12]{_id, title, slug, date, url}`;
 
 interface Gig {
@@ -13,5 +12,7 @@ interface Gig {
 }
 
 export async function fetchGigs() {
-  return sanityClient.fetch<Gig[]>(GIGS_QUERY);
+  const gigs = await sanityClient.fetch<Gig[]>(GIGS_QUERY);
+  const sortedGigs = gigs.toSorted((a, b) => a.date.localeCompare(b.date));
+  return sortedGigs;
 }

@@ -1,0 +1,70 @@
+---
+import { fetchGigs } from "../lib/api/gigs";
+
+const gigs = await fetchGigs();
+---
+
+{
+  !gigs.length ? null : (
+    <ul role="list">
+      {gigs.map((gig) => {
+        const date = new Date(gig.date);
+
+        return (
+          <li>
+            <div class="datetime">
+              <span>
+                {new Intl.DateTimeFormat("nl-NL", {
+                  timeZone: "Europe/Amsterdam",
+                  day: "2-digit",
+                  month: "short",
+                }).format(date)}
+              </span>
+              <span>
+                {new Intl.DateTimeFormat("nl-NL", {
+                  timeZone: "Europe/Amsterdam",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  hour12: false,
+                }).format(date)}
+              </span>
+            </div>
+            <div>
+              <h2>{gig.title}</h2>
+              <a href={gig.url} target="_blank" rel="noopener noreferrer">
+                Website
+              </a>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  )
+}
+
+<style>
+  ul {
+    margin-top: 1rem;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+
+      h2 {
+        margin: 0;
+      }
+
+      .datetime {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+
+        border: 1px solid black;
+        border-radius: 0.25rem;
+        padding: 0.25rem 0.5rem;
+      }
+    }
+  }
+</style>
