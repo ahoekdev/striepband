@@ -23,6 +23,10 @@ export const pageType = defineType({
           name: 'textWithHeading',
           type: 'textWithHeading',
         }),
+        // defineArrayMember({
+        //   name: 'richText',
+        //   type: 'richText',
+        // }),
       ],
     }),
   ],
