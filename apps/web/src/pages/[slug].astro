@@ -1,14 +1,26 @@
 ---
+import { PortableText } from "astro-portabletext";
 import TextWithIllustration from "../components/blocks/TextWithIllustration.astro";
 import GigsList from "../components/GigsList.astro";
 import SiteLayout from "../layouts/SiteLayout.astro";
-import { fetchGigs } from "../lib/api/gigs";
 import { fetchPageBySlug } from "../lib/api/pages";
 
-interface Block {
-  _type: string;
+interface TextWithHeadingBlock {
+  _type: "textWithHeading";
+  heading?: string;
   text: string;
 }
+
+// TODO generate types https://www.sanity.io/learn/course/typescripted-content
+interface BlockContentBlock {
+  _type: "blockContent";
+  content: Array<{
+    _type: string;
+    [key: string]: unknown;
+  }>;
+}
+
+type Block = TextWithHeadingBlock | BlockContentBlock;
 
 const { slug } = Astro.params;
 
@@ -32,6 +44,8 @@ if (!page) {
         switch (block._type) {
           case "textWithHeading":
             return <TextWithIllustration {...block} />;
+          case "blockContent":
+            return <PortableText value={block.content} />;
           default:
             return null;
         }
