@@ -6,7 +6,7 @@ import sanity from "@sanity/astro";
 
 import netlify from "@astrojs/netlify";
 
-const { SANITY_DATASET } = loadEnv(process.env.NODE_ENV, process.cwd(), "");
+const { SANITY_STUDIO_DATASET, SANITY_STUDIO_PROJECT_ID } = loadEnv(process.env.NODE_ENV, process.cwd(), "");
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,8 +14,8 @@ export default defineConfig({
   adapter: netlify(),
   integrations: [
     sanity({
-      projectId: "c2n8vovr",
-      dataset: SANITY_DATASET,
+      projectId: SANITY_STUDIO_PROJECT_ID,
+      dataset: SANITY_STUDIO_DATASET,
       useCdn: false, // for static builds
     }),
   ],
