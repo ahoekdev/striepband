@@ -3,11 +3,30 @@ import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './schemaTypes'
 
-export default defineConfig({
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID!,
-  dataset: process.env.SANITY_STUDIO_DATASET || 'development',
-  plugins: [structureTool(), visionTool()],
-  schema: {
-    types: schemaTypes,
+const { SANITY_STUDIO_PROJECT_ID } = process.env;
+
+export default defineConfig([
+  {
+    name: 'development',
+    title: 'Development',
+    projectId: "c2n8vovr",
+    dataset: 'development',
+    basePath: '/development',
+    plugins: [structureTool(), visionTool()],
+    schema: {
+      types: schemaTypes,
+    },
   },
-})
+  {
+    name: 'production',
+    title: 'Production',
+    projectId: "c2n8vovr",
+    dataset: 'production',
+    basePath: '/production',
+    plugins: [structureTool(), visionTool()],
+    schema: {
+      types: schemaTypes,
+    },
+  },
+])
+
