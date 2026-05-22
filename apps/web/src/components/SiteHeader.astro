@@ -52,6 +52,9 @@ const pathname = Astro.url.pathname;
     position: sticky;
     top: 0;
 
+    /* Set z-index to 1 because of youtube videos otherwise rendering above the header */
+    z-index: 1;
+
     .container {
       height: 100%;
       display: flex;
