@@ -2,6 +2,7 @@
 import { PortableText } from "astro-portabletext";
 import TextWithIllustration from "../components/blocks/TextWithIllustration.astro";
 import GigsList from "../components/GigsList.astro";
+import YouTubeEmbed from "../components/portable-text/YouTubeEmbed.astro";
 import SiteLayout from "../layouts/SiteLayout.astro";
 import { fetchPageBySlug } from "../lib/api/pages";
 
@@ -33,6 +34,12 @@ const page = await fetchPageBySlug(slug);
 if (!page) {
   return new Response(null, { status: 404 });
 }
+
+const portableTextComponents = {
+  type: {
+    youTube: YouTubeEmbed,
+  },
+};
 ---
 
 <SiteLayout>
@@ -45,7 +52,7 @@ if (!page) {
           case "textWithHeading":
             return <TextWithIllustration {...block} />;
           case "blockContent":
-            return <PortableText value={block.content} />;
+            return <PortableText value={block.content} components={portableTextComponents} />;
           default:
             return null;
         }
